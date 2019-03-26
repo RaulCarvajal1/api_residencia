@@ -2,7 +2,7 @@
   "name": "api",
   "version": "0.1.0",
   "description": "API para proyecto de residencia",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,5 +24,13 @@
   "bugs": {
     "url": "https://github.com/RaulCarvajal/api_residencia/issues"
   },
-  "homepage": "https://github.com/RaulCarvajal/api_residencia#readme"
+  "homepage": "https://github.com/RaulCarvajal/api_residencia#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "http-status": "^1.3.1",
+    "mongoose": "^5.4.19",
+    "underscore": "^1.9.1",
+    "wagner-core": "^0.2.0"
+  }
 }
