@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 
 //Building schema for EMG Machine
 const machineSchema = new mongoose.Schema({
-    code : {
-        type: String, 
-        required: true
-    },
     qr : { 
         data: Buffer, 
         contentType: String 
+    },
+    info : {
+        sub_brand : { type: String},
+        model : { type: String, require : true},
+        description : { type : String}
     },
     location : {
         plant : {
@@ -34,9 +35,14 @@ const machineSchema = new mongoose.Schema({
                 require : true
             },
             start : {type :  Date, required : true},
-            sfinish : {type :  Date, required : true} 
+            finish : {type :  Date, required : true} 
         }
     ],
+    active : {
+        type : Boolean,
+        required : true,
+        default : true
+    },
     meta : {
         registred_by : {
             type :  mongoose.Schema.Types.ObjectId,

@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema({
         type : String,
         required :true
     },
+    role : {
+        type : Number,
+        required : true
+    },
     person : {
         name : {
             type : String,
@@ -26,14 +30,14 @@ const userSchema = new mongoose.Schema({
             contentType: String 
         }
     },
+    active : {
+        type : Boolean,
+        required : true,
+        default : true
+    },
     meta : {
-        active : {
-            type : Boolean,
-            required : true,
-            default : true
-        },
         registred_by : {
-            type :  mongoose.Schema.Types.ObjectId,
+            type :  Schema.Types.ObjectId,
             require : true
         },
         registred_date : {

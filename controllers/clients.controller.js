@@ -1,11 +1,11 @@
 const status = require('http-status');
 
-let _user;
+let _client;
 
-//Create users
-const newu = (req, res) => {
-    const user = req.body;
-    _user.create(user)
+//Create client
+const newc = (req, res) => {
+    const client = req.body;
+    _client.create(client)
         .then(data => {
             console.log(data);
             res.status(200);
@@ -23,44 +23,14 @@ const newu = (req, res) => {
             });
         });
 };
-//Login
-const login = (req, res) => {
-    const body = req.body;
-    _user.findOne({ username : body.username })
-        .then(user => {
-            if(user.password == body.password && user.active==true){
-                res.status(200);
-                res.json({
-                    code: 200,
-                    authorized: true,
-                    role : user.role,
-                    id : user._id
-                });
-            }else{
-                res.status(200);
-                res.json({
-                    code: 200,
-                    authorized: false,
-                    msg : "Usuario inexistente o inactivo"
-                });
-            }
-        })
-        .catch(error => {
-            res.status(400);
-            res.json({
-                code: 400,
-                detail: error
-            });
-        });
-}
-//Get users
+//Get clients
 const getAll = (req, res) => {
-    _user.find({})
-        .then(users => {
+    _client.find({})
+        .then(clients => {
             res.status(200);
             res.json({
                 code: 200,
-                detail: users
+                detail: clients
             });
         })
         .catch(error => { 
@@ -71,33 +41,15 @@ const getAll = (req, res) => {
             });
         });
 };
-//Get users by role
-const getByRole = (req, res) => {
-    _user.find({role : req.params.role})
-        .then(users => {
-            res.status(200);
-            res.json({
-                code: 200,
-                detail: users
-            });
-        })
-        .catch(error => { 
-            res.status(400);
-            res.json({
-                code: status[400],
-                detail: error
-            });
-        });
-};
-//Get user
+//Get client
 const getById = (req, res) => {
     const id = req.params.id;
-    _user.findOne({ _id: id })
-        .then(user => {
+    _client.findOne({ _id: id })
+        .then(client => {
             res.status(200);
             res.json({
                 code: 200,
-                detail: user
+                detail: client
             });
         })
         .catch(error => {
@@ -108,15 +60,33 @@ const getById = (req, res) => {
             });
         });
 }
-//Update
-const updateu = (req, res) => {
-    const user = req.body;
+//Get client list name
+const getNames = (req, res) => {
+    _client.find({},'name')
+        .then(clients => {
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: clients
+            });
+        })
+        .catch(error => { 
+            res.status(400);
+            res.json({
+                code: status[400],
+                detail: error
+            });
+        });
+};
+//Update client
+const updatec = (req, res) => {
+    const client = req.body;
     console.log(req);
-    _user.update({ _id: user.id },
+    _client.update({ _id: client.id },
         {$set : { 
-                  username : user.username,
-                  password : user.password,
-                  person : user.person
+                  name : client.name,
+                  contact : client.contact,
+                  address : client.client
                 }})
         .then(data =>{
             console.log(data);
@@ -135,10 +105,10 @@ const updateu = (req, res) => {
             });
         });    
 };
-//Disable
+//Disable client
 const disable = (req, res) => {
     const id = req.params.id;
-    _user.update({ _id: id },{$set : { active : false}})
+    _client.update({ _id: id },{$set : { active : false}})
         .then(data =>{
             res.status(200);
             res.json({
@@ -155,10 +125,10 @@ const disable = (req, res) => {
             });
         });    
 };
-//Enable
+//Enable client
 const enable = (req, res) => {
     const id = req.params.id;
-    _user.update({ _id: id },{$set : { active : true}})
+    _client.update({ _id: id },{$set : { active : true}})
         .then(data =>{
             res.status(200);
             res.json({
@@ -176,9 +146,9 @@ const enable = (req, res) => {
         });    
 };
 
-module.exports = (User) => {
-    _user = User;
+module.exports = (Client) => {
+    _client = Client;
     return ({
-        newu, login, getAll, getByRole, getById, updateu, disable, enable
+        newc, getAll, getById, getNames, updatec, disable, enable
     });
 }
