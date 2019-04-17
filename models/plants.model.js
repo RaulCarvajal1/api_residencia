@@ -1,27 +1,45 @@
 const mongoose = require('mongoose');
 
-//Building schema for clients
-const clientSchema = new mongoose.Schema({
+//Building schema for plantas
+const plantsSchema = new mongoose.Schema({
     name : {
         type : String,
         required :true
     },
-    contact : {
+    code : {
+        type : String,
+        required :true
+    },
+    client : {
+        type :  mongoose.Schema.Types.ObjectId,
+        require : true
+    },
+    boss : {
         name : {
             type : String,
             required :true
         },
         email : {
             type : String,
-            required : true,
             match :  /.+@.+\..+/,
             lowercase : true
+        },
+        phone : { 
+            type : String,
         }
     },
-    address : {
-        type : String,
-        required : true
-    },
+    lines : [
+        {
+            number : {
+                type : Number,
+                required : true
+            },
+            desc : {
+                type : String,
+                required : true
+            }
+        }
+    ],
     active : {
         type : Boolean,
         required : true,
@@ -41,6 +59,6 @@ const clientSchema = new mongoose.Schema({
 });
 
 //Setting collection name and model
-const clientModel = mongoose.model('Client', clientSchema, 'clients');
+const plantsModel = mongoose.model('Plants', plantsSchema, 'plants');
 
-module.exports = clientModel;
+module.exports = plantsModel;

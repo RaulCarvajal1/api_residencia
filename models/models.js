@@ -8,14 +8,16 @@ module.exports = (wagner) => {
 
     wagner.factory('db', ()=> mongoose);
 
-    const Machine = require('./machines.model');
+    const Emg = require('./emg.model');
+    const Plant = require('./plants.model');
+    const Service = require('./services.model');
     const User = require('./users.model');
-    const Clients = require('./clients.model');
 
     const models = {
-        Machine,
         User,
-        Clients
+        Emg,
+        Plant,
+        Service
     }
     _.each(models, (v, k)=> {
         wagner.factory(k, ()=>v);

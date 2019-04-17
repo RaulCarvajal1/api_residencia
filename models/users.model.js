@@ -14,20 +14,18 @@ const userSchema = new mongoose.Schema({
         type : Number,
         required : true
     },
-    person : {
+    info : {
         name : {
             type : String,
             required :true
         },
         email : {
             type : String,
-            required : true,
             match :  /.+@.+\..+/,
             lowercase : true
         },
-        avatar : { 
-            data: Buffer, 
-            contentType: String 
+        code : { 
+            type : String,
         }
     },
     active : {
@@ -37,7 +35,7 @@ const userSchema = new mongoose.Schema({
     },
     meta : {
         registred_by : {
-            type :  Schema.Types.ObjectId,
+            type :  mongoose.Schema.Types.ObjectId,
             require : true
         },
         registred_date : {
