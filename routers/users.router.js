@@ -6,7 +6,7 @@ module.exports = (wagner) =>{
     
     //Create user
     userRouter.post("/create",(req,res)=>{//ok!
-        userCtrl.newu(req,res);
+        userCtrl.newUser(req,res);
     });
     //Login
     userRouter.post("/login",(req,res)=>{//ok!
@@ -16,9 +16,9 @@ module.exports = (wagner) =>{
     userRouter.get("/getall",(req,res)=>{//ok!
         userCtrl.getAll(req,res);
     });
-    //Get users by role
-    userRouter.get("/getbybole/:role",(req,res)=>{//ok!
-        userCtrl.getByRole(req,res);
+    //Get users Tecnicos
+    userRouter.get("/gettec",(req,res)=>{//ok!
+        userCtrl.getTec(req,res);
     });
     //Get users by id
     userRouter.get("/getbyid/:id",(req,res)=>{//ok!
@@ -36,6 +36,10 @@ module.exports = (wagner) =>{
     userRouter.patch("/enable/:id",(req,res)=>{//ok!!
         userCtrl.enable(req,res);
     });
+    //Permisos
+    userRouter.patch("/modpermissions/:id",(req,res)=>{//ok!!
+        userCtrl.modPermissions(req,res);
+    });
 
     return userRouter;
-}
+} 

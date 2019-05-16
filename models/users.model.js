@@ -33,6 +33,20 @@ const userSchema = new mongoose.Schema({
         required : true,
         default : true
     },
+    permissions : {
+        emg : {
+            type : Boolean,
+            required : true
+        },
+        tecnicos  : { 
+            type : Boolean,
+            required : true
+        },
+        clientes : {
+            type : Boolean,
+            required : true
+        }
+    },
     meta : {
         registred_by : {
             type :  mongoose.Schema.Types.ObjectId,
@@ -45,7 +59,7 @@ const userSchema = new mongoose.Schema({
         }
     }
 });
-
+ 
 //Setting collection name and model
 const userModel = mongoose.model('User2', userSchema, 'users2');
 

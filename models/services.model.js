@@ -14,12 +14,16 @@ const servicesSchema = new mongoose.Schema({
         type : Date, 
         default : Date.now
     },
-    hour_start : {
+    start : {
         type :  Date, 
         required : true
     },
-    hour_finish : {
+    finish : {
         type :  Date, 
+        required : true
+    },
+    status : {
+        type :  Number, 
         required : true
     },
     tecnico : {
@@ -29,6 +33,17 @@ const servicesSchema = new mongoose.Schema({
     emg : {
         type :  mongoose.Schema.Types.ObjectId,
         require : true
+    },
+    owner : {
+        client : {
+
+        },
+        plant : {
+
+        },
+        line : {
+            
+        }
     },
     signature : { 
         data: Buffer, 
@@ -44,7 +59,7 @@ const servicesSchema = new mongoose.Schema({
             required : true,
             default : Date.now
         }
-    }
+    } 
 });
 
 //Setting collection name and model

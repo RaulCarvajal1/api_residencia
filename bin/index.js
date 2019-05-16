@@ -5,5 +5,5 @@ const server = require('http').Server(app);
 const port = 3030;
 
 //Server listening
-server.listen(port);
+server.listen(process.env.PORT || port);
 console.log(`Running on port ${port}`);

@@ -2,8 +2,8 @@ const status = require('http-status');
 
 let _user;
 
-//Create users
-const newu = (req, res) => {
+//Add user
+const newUser = (req, res) => {
     const user = req.body;
     _user.create(user)
         .then(data => {
@@ -23,7 +23,8 @@ const newu = (req, res) => {
             });
         });
 };
-//Login
+
+//Login ??
 const login = (req, res) => {
     const body = req.body;
     _user.findOne({ username : body.username })
@@ -53,6 +54,7 @@ const login = (req, res) => {
             });
         });
 }
+
 //Get users
 const getAll = (req, res) => {
     _user.find({})
@@ -71,25 +73,8 @@ const getAll = (req, res) => {
             });
         });
 };
-//Get users by role
-const getByRole = (req, res) => {
-    _user.find({role : req.params.role})
-        .then(users => {
-            res.status(200);
-            res.json({
-                code: 200,
-                detail: users
-            });
-        })
-        .catch(error => { 
-            res.status(400);
-            res.json({
-                code: status[400],
-                detail: error
-            });
-        });
-};
-//Get user
+
+//Get user by id
 const getById = (req, res) => {
     const id = req.params.id;
     _user.findOne({ _id: id })
@@ -108,6 +93,26 @@ const getById = (req, res) => {
             });
         });
 }
+
+//Get users tec
+const getTec = (req, res) => {
+    _user.find({role : 1},'info')
+        .then(users => {
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: users
+            });
+        })
+        .catch(error => { 
+            res.status(400);
+            res.json({
+                code: status[400],
+                detail: error
+            });
+        });
+};
+
 //Update
 const updateu = (req, res) => {
     const user = req.body;
@@ -116,7 +121,7 @@ const updateu = (req, res) => {
         {$set : { 
                   username : user.username,
                   password : user.password,
-                  person : user.person
+                  info : user.info 
                 }})
         .then(data =>{
             console.log(data);
@@ -135,6 +140,7 @@ const updateu = (req, res) => {
             });
         });    
 };
+
 //Disable
 const disable = (req, res) => {
     const id = req.params.id;
@@ -155,6 +161,7 @@ const disable = (req, res) => {
             });
         });    
 };
+
 //Enable
 const enable = (req, res) => {
     const id = req.params.id;
@@ -176,9 +183,31 @@ const enable = (req, res) => {
         });    
 };
 
+//Modificar permisos
+const modPermissions = (req, res) => {
+    const id = req.params.id;
+    const perm = req.body.perm;
+    _user.update({ _id: id },{$set : { permissions : perm}})
+        .then(data =>{
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: data
+            });
+        })
+        .catch(error =>{
+            console.log(error);
+            res.status(400);
+            res.json({
+                code: 400,
+                detail: error
+            });
+        });    
+};
+
 module.exports = (User) => {
     _user = User;
     return ({
-        newu, login, getAll, getByRole, getById, updateu, disable, enable
+        newUser, login, getAll, getTec, getById, updateu, disable, enable, modPermissions
     });
-}
+} 
