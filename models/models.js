@@ -4,7 +4,7 @@ const _ = require('underscore');
 module.exports = (wagner) => {
     //Conexión a la base de datos
     mongoose.Promise = global.Promise;
-    mongoose.connect('mongodb+srv://raul:raulcrvjl@cluster0-fpsib.mongodb.net/test?retryWrites=true', { useNewUrlParser: true });
+    mongoose.connect('mongodb://localhost:27017/emg', { useNewUrlParser: true });
 
     wagner.factory('db', ()=> mongoose);
 

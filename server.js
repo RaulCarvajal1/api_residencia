@@ -6,8 +6,9 @@ require('./models/models')(wagner);
 
 //Importar Router
 const servicesRouter = require('./routers/services.router')(wagner);
-//const clientRouter = require('./routers/clients.router')(wagner);
 const usersRouter = require('./routers/users.router')(wagner);
+const plantsRouter = require('./routers/plants.router')(wagner);
+const emgsRouter = require('./routers/emgs.router')(wagner);
 
 // Configurando servidor express
 let app = express();
@@ -15,8 +16,9 @@ let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
-app.use("/machine",servicesRouter);
-//app.use("/client",clientRouter);
+app.use("/service",servicesRouter);
 app.use("/user",usersRouter);
+app.use("/plant",plantsRouter);
+app.use("/emg",emgsRouter);
 
 module.exports = app;

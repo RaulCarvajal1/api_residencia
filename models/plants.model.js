@@ -3,21 +3,17 @@ const mongoose = require('mongoose');
 //Building schema for plantas
 const plantsSchema = new mongoose.Schema({
     name : {
-        type : String,
-        required :true
+        type : String
     },
     code : {
-        type : String,
-        required :true
+        type : String
     },
     client : {
-        type :  mongoose.Schema.Types.ObjectId,
-        require : true
+        type :  mongoose.Schema.Types.ObjectId
     },
     boss : {
         name : {
-            type : String,
-            required :true
+            type : String
         },
         email : {
             type : String,
@@ -30,6 +26,10 @@ const plantsSchema = new mongoose.Schema({
     },
     lines : [
         {
+            plant_id : {
+                type :  mongoose.Schema.Types.ObjectId,
+                require : true
+            },
             number : {
                 type : Number,
                 required : true

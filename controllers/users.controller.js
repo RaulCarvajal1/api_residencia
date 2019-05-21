@@ -34,8 +34,7 @@ const login = (req, res) => {
                 res.json({
                     code: 200,
                     authorized: true,
-                    role : user.role,
-                    id : user._id
+                    detail : user
                 });
             }else{
                 res.status(200);
@@ -210,4 +209,4 @@ module.exports = (User) => {
     return ({
         newUser, login, getAll, getTec, getById, updateu, disable, enable, modPermissions
     });
-} 
+}  
