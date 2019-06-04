@@ -5,11 +5,12 @@ const emgSchema = new mongoose.Schema({
     qr : { 
         data: Buffer, 
         contentType: String 
-    },
+    }, 
     info : {
         type : { type: String},
         model : { type: String, require : true},
-        description : { type : String}
+        description : { type : String},
+        serial: {type : String}
     },
     client : {
         type :  mongoose.Schema.Types.ObjectId,
@@ -23,6 +24,10 @@ const emgSchema = new mongoose.Schema({
         type :  mongoose.Schema.Types.ObjectId,
         require : true
     },
+    status:{
+        type : Number,
+        default : 0
+    },
     active : {
         type : Boolean,
         required : true,
@@ -35,7 +40,6 @@ const emgSchema = new mongoose.Schema({
         },
         registred_date : {
             type : Date,
-            required : true,
             default : Date.now
         }
     }

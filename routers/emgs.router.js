@@ -11,6 +11,10 @@ module.exports = (wagner) => {
     emgsRouter.get("/getbyid/:id",(req,res)=>{
         emgsCtrl.getById(req,res); 
     });
+
+    emgsRouter.get("/getbyplantandline/:id_p/:id_l",(req,res)=>{
+        emgsCtrl.getByPlantAndLine(req,res);
+    });
     //Get by client
     emgsRouter.get("/getbyclient/:id",(req,res)=>{
         emgsCtrl.getByClient(req,res); 
@@ -25,7 +29,11 @@ module.exports = (wagner) => {
     });
     //New emg
     emgsRouter.post("/create",(req,res)=>{
-        emgsCtrl.newPlanta(req,res);
+        emgsCtrl.newEmg(req,res);
+    })
+    //New emg
+    emgsRouter.put("/genqr/:id",(req,res)=>{
+        emgsCtrl.genQrEmg(req,res);
     })
     //Disable
     emgsRouter.patch("/disable/:id",(req,res)=>{//ok!

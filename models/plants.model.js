@@ -26,10 +26,6 @@ const plantsSchema = new mongoose.Schema({
     },
     lines : [
         {
-            plant_id : {
-                type :  mongoose.Schema.Types.ObjectId,
-                require : true
-            },
             number : {
                 type : Number,
                 required : true

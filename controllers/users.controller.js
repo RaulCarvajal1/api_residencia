@@ -1,5 +1,5 @@
 const status = require('http-status');
-
+const sgMail = require('@sendgrid/mail');
 let _user;
 
 //Add user
@@ -23,6 +23,19 @@ const newUser = (req, res) => {
             });
         });
 };
+
+//
+const sendEmail=(req,res)=>{
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: 'raulcrvjl@gmail.com',
+      from: 'raracarvajalgu@ittepic.edu.mx',
+      subject: 'Hello world',
+      text: 'Hello plain world!',
+      html: '<p>Hello HTML world!</p>',
+    };
+    sgMail.send(msg);
+}
 
 //Login ??
 const login = (req, res) => {
@@ -112,14 +125,32 @@ const getTec = (req, res) => {
         });
 };
 
+//Get users clients
+const getClients = (req, res) => {
+    _user.find({role : 2})
+        .then(users => {
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: users
+            });
+        })
+        .catch(error => { 
+            res.status(400);
+            res.json({
+                code: status[400],
+                detail: error
+            });
+        });
+};
+
 //Update
 const updateu = (req, res) => {
     const user = req.body;
     console.log(req);
-    _user.update({ _id: user.id },
+    _user.update({ _id: user._id },
         {$set : { 
                   username : user.username,
-                  password : user.password,
                   info : user.info 
                 }})
         .then(data =>{
@@ -204,9 +235,29 @@ const modPermissions = (req, res) => {
         });    
 };
 
+//usuarioexiste
+const existe = (req, res) => {
+    const name = req.params.name;
+    _user.findOne({ username: name })
+        .then(user => {
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: user
+            });
+        })
+        .catch(error => {
+            res.status(400);
+            res.json({
+                code: 400,
+                detail: error
+            });
+        });
+}
+
 module.exports = (User) => {
     _user = User;
     return ({
-        newUser, login, getAll, getTec, getById, updateu, disable, enable, modPermissions
+        newUser, login, getAll, getTec, getById, updateu, disable, enable, modPermissions, sendEmail, existe, getClients
     });
 }  

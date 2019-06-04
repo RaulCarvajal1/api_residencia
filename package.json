@@ -26,10 +26,12 @@
   },
   "homepage": "https://github.com/RaulCarvajal/api_residencia#readme",
   "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "http-status": "^1.3.1",
     "mongoose": "^5.4.19",
+    "qrcode": "^1.3.3",
     "underscore": "^1.9.1",
     "wagner-core": "^0.2.0"
   }

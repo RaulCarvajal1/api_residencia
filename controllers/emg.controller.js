@@ -1,3 +1,4 @@
+const qrcode = require('qrcode');
 let _emg
 
 //Get todos
@@ -41,6 +42,26 @@ const getById = (req, res) => {
 const getByClient = (req, res) => {
     const idclient = req.params.id;
     _emg.find({ client : idclient })
+        .then(emgs => {
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: emgs
+            });
+        })
+        .catch(error => {
+            res.status(400);
+            res.json({
+                code: 400,
+                detail: error
+            });
+        });
+}
+//Get by plant&line
+const getByPlantAndLine = (req, res) => {
+    const id_p = req.params.id_p;
+    const id_l = req.params.id_l;
+    _emg.find({$and:[{ plant : id_p},{line : id_l}]})
         .then(emgs => {
             res.status(200);
             res.json({
@@ -115,6 +136,32 @@ const newEmg = (req, res) => {
             });
         });
 };
+//Generate and save QR code emg
+const genQrEmg = (req, res) => {
+    const id = req.params.id;
+    qrcode.toDataURL(id,{ errorCorrectionLevel: 'H' })
+          .then(url => {
+            _emg.update({ _id: id },{$set : { qr : url}})
+                    .then(data =>{
+                        res.status(200);
+                        res.json({
+                            code: 200,
+                            detail: data
+                        });
+                    })
+                    .catch(error =>{
+                        console.log(error);
+                        res.status(400);
+                        res.json({
+                            code: 400,
+                            detail: error
+                        });
+                    });  
+          })
+          .catch(err => {
+            console.error(err)
+          });  
+};
 //Disable
 const disable = (req, res) => {
     const id = req.params.id;
@@ -159,6 +206,6 @@ const enable = (req, res) => {
 module.exports = (Emg) => {
     _emg = Emg;
     return ({
-        getAll, getById, getByClient, getByPlant, getByLine, newEmg, disable, enable
+        getAll, getById, getByClient, getByPlant, getByLine, newEmg, disable, enable, genQrEmg, getByPlantAndLine
     })
 }

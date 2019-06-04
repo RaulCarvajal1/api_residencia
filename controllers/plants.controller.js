@@ -44,10 +44,28 @@ const addLine = (req, res) => {
             });
         }); 
 }
+//GetAll
+const getAll = (req, res) => {
+    _plant.find({})
+        .then(plants => {
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: plants
+            });
+        })
+        .catch(error => {
+            res.status(400);
+            res.json({
+                code: 400,
+                detail: error
+            });
+        });
+}
 //Get plantas by client
 const getByClient = (req, res) => {
     const id = req.params.id  ;
-    _plant.find({ _id : id })
+    _plant.find({ client : id })
         .then(plant => {
             res.status(200);
             res.json({
@@ -82,11 +100,33 @@ const getLinesByClient = (req, res) => {
             });
         });
 }
-//Update boss
-const updateBoss = (req, res) => {
+//Get lines by plant 
+const getById = (req, res) => {
     const id = req.params.id;
-    const bossp = req.body.boss;
-    _plant.update({ _id: id },{$set : {boss : bossp}})
+    _plant.findOne({ _id : id },)
+        .then(plant => {
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: plant
+            });
+        })
+        .catch(error => {
+            res.status(400);
+            res.json({
+                code: 400,
+                detail: error
+            });
+        });
+}
+//Update boss
+const update = (req, res) => {
+    const params = req.body;
+    _plant.update({ _id: params._id },{$set : {
+                    name : params.name,
+                    code : params.code,
+                    boss : params.boss
+                  }})
         .then(data =>{
             res.status(200);
             res.json({
@@ -144,9 +184,9 @@ const enable = (req, res) => {
         });    
 };
 
-module.export = (Plant) => {
+module.exports = (Plant) => {
     _plant = Plant;
     return ({
-        newPlanta, addLine, getByClient, getLinesByClient, updateBoss, disable, enable
+        newPlanta, addLine, getByClient, getLinesByClient, update, disable, enable, getAll, getById 
     })
 }
