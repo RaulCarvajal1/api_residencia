@@ -26,8 +26,8 @@ const plantsSchema = new mongoose.Schema({
     },
     lines : [
         {
-            number : {
-                type : Number,
+            code : {
+                type : String,
                 required : true
             },
             desc : {
