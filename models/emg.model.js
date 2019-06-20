@@ -7,6 +7,7 @@ const emgSchema = new mongoose.Schema({
         contentType: String 
     }, 
     info : {
+        name : { type: String},
         type : { type: String},
         model : { type: String, require : true},
         description : { type : String},

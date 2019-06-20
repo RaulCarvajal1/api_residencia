@@ -26,7 +26,11 @@ const plantsSchema = new mongoose.Schema({
     },
     lines : [
         {
-            code : {
+            name : {
+                type : String,
+                required : true
+            },
+            shortname : {
                 type : String,
                 required : true
             },
