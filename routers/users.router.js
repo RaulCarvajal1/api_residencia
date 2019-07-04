@@ -24,6 +24,11 @@ module.exports = (wagner) =>{
     userRouter.get("/getclients",(req,res)=>{//ok!
         userCtrl.getClients(req,res);
     });
+    
+    //Get users Clients names
+    userRouter.get("/getclientsnames",(req,res)=>{//ok!
+        userCtrl.getClientsNames(req,res);
+    });
     //Get users by id
     userRouter.get("/getbyid/:id",(req,res)=>{//ok!
         userCtrl.getById(req,res); 
@@ -31,6 +36,10 @@ module.exports = (wagner) =>{
     //Update
     userRouter.put("/update",(req,res)=>{//ok!
         userCtrl.updateu(req,res);
+    });
+    //Update pass
+    userRouter.put("/updatepass",(req,res)=>{//ok!
+        userCtrl.updatePass(req,res);
     });
     //Disable
     userRouter.patch("/disable/:id",(req,res)=>{//ok!
@@ -44,7 +53,7 @@ module.exports = (wagner) =>{
     userRouter.patch("/modpermissions/:id",(req,res)=>{//ok!!
         userCtrl.modPermissions(req,res);
     });
-
+    
     userRouter.get("/existe/:name",(req,res)=>{
         userCtrl.existe(req,res);
     });

@@ -29,7 +29,7 @@ module.exports = (wagner) => {
         serviceCtrl.newServ(req,res);
     });
     //Asignar tecnico
-    serviceRouter.patch("/asigtec/:id",(req,res)=>{//ok!!
+    serviceRouter.patch("/asigtec/:id_s/:id_t",(req,res)=>{//ok!!
         serviceCtrl.asigtecServicio(req,res);
     });
     //Iniciar servicio

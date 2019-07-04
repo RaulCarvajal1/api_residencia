@@ -24,7 +24,7 @@ const getAll = (req, res) => {
 //get servicios por cliente
 const getByClient = (req, res) => {
     const idclient = req.params.idclient;
-    _service.find({'owner.client' : idclient })
+    _service.find({ client : idclient })
         .then(user => {
             res.status(200);
             res.json({
@@ -120,13 +120,14 @@ const newServ = (req, res) => {
 };
 //asignar tecnico
 const asigtecServicio = (req, res) => {
-    const id = req.params.id;
-    const tecid = req.body.tecid;
-    _user.update({ _id: id },{$set : { 
-                                        start : Date.now,
-                                        status : 1,
-                                        tecnico : tecid
-                                      }})
+    const id_s = req.params.id_s;
+    const id_t = req.params.id_t;
+    _service.update({ _id: id_s },{$set : 
+                                { 
+                                    status : 1,
+                                    tecnico : id_t
+                                }
+                            })
         .then(data =>{
             res.status(200);
             res.json({
@@ -146,8 +147,8 @@ const asigtecServicio = (req, res) => {
 //iniciar servicio
 const iniciarServicio = (req, res) => {
     const id = req.params.id;
-    _user.update({ _id: id },{$set : { 
-                                        start : Date.now,
+    _service.update({ _id: id },{$set : { 
+                                        start : Date.now(),
                                         status : 2
                                     }})
         .then(data =>{
@@ -170,7 +171,7 @@ const iniciarServicio = (req, res) => {
 const finalizarServicio = (req, res) => {
     const id = req.params.id;
     const sign = req.body.sign;
-    _user.update({ _id: id },{$set : { 
+    _service.update({ _id: id },{$set : { 
                                         start : Date.now,
                                         status : 3,
                                         signature : sign

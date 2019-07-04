@@ -144,6 +144,25 @@ const getClients = (req, res) => {
         });
 };
 
+//Get users clients names
+const getClientsNames = (req, res) => {
+    _user.find({role : 2},'info.name')
+        .then(users => {
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: users
+            });
+        })
+        .catch(error => { 
+            res.status(400);
+            res.json({
+                code: status[400],
+                detail: error
+            });
+        });
+};
+
 //Update
 const updateu = (req, res) => {
     const user = req.body;
@@ -152,6 +171,31 @@ const updateu = (req, res) => {
         {$set : { 
                   username : user.username,
                   info : user.info 
+                }})
+        .then(data =>{
+            console.log(data);
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: data
+            });
+        })
+        .catch(error =>{
+            console.log(error);
+            res.status(400);
+            res.json({
+                code: 400,
+                detail: error
+            });
+        });    
+};
+//Update pasword
+const updatePass = (req, res) => {
+    const user = req.body;
+    console.log(req);
+    _user.update({ _id: user._id },
+        {$set : { 
+                  password : user.password,
                 }})
         .then(data =>{
             console.log(data);
@@ -258,6 +302,6 @@ const existe = (req, res) => {
 module.exports = (User) => {
     _user = User;
     return ({
-        newUser, login, getAll, getTec, getById, updateu, disable, enable, modPermissions, sendEmail, existe, getClients
+        newUser, login, getAll, getTec, getById, updateu, disable, enable, modPermissions, sendEmail, existe, getClients, updatePass, getClientsNames
     });
 }  

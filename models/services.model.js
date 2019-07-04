@@ -11,55 +11,36 @@ const servicesSchema = new mongoose.Schema({
         required : true
     },
     date : {
-        type : Date, 
-        default : Date.now
+        type : Date,
+        required : true
     },
     start : {
-        type :  Date, 
-        required : true
+        type :  Date
     },
     finish : {
-        type :  Date, 
-        required : true
+        type :  Date
     },
     status : {
         type :  Number, 
         required : true
     },
+    client : {
+        type :  mongoose.Schema.Types.ObjectId
+    },
     tecnico : {
-        type :  mongoose.Schema.Types.ObjectId,
-        require : true
+        type :  mongoose.Schema.Types.ObjectId
     },
     emg : {
         type :  mongoose.Schema.Types.ObjectId,
         require : true
     },
-    owner : {
-        client : {
-
-        },
-        plant : {
-
-        },
-        line : {
-            
-        }
+    observ : {
+        type : String
     },
     signature : { 
         data: Buffer, 
         contentType: String 
-    },
-    meta : {
-        registred_by : {
-            type :  mongoose.Schema.Types.ObjectId,
-            require : true
-        },
-        registred_date : {
-            type : Date,
-            required : true,
-            default : Date.now
-        }
-    } 
+    }
 });
 
 //Setting collection name and model
