@@ -9,6 +9,7 @@ const servicesRouter = require('./routers/services.router')(wagner);
 const usersRouter = require('./routers/users.router')(wagner);
 const plantsRouter = require('./routers/plants.router')(wagner);
 const emgsRouter = require('./routers/emgs.router')(wagner);
+const configsRouter = require('./routers/config_fecha.router')(wagner);
 
 // Configurando servidor express
 let app = express();
@@ -33,5 +34,6 @@ app.use("/service",servicesRouter);
 app.use("/user",usersRouter);
 app.use("/plant",plantsRouter);
 app.use("/emg",emgsRouter);
+app.use("/config",configsRouter);
 
 module.exports = app;

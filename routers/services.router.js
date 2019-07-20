@@ -39,7 +39,19 @@ module.exports = (wagner) => {
     //Finalizar servicio
     serviceRouter.put("/finish/:id",(req,res)=>{//ok!!
         serviceCtrl.finalizarServicio(req,res);
-    }); 
+    });
+    //Servicio Solicitado Email
+    serviceRouter.post("/emailsolicitarservicio",(req,res)=>{//ok!
+        serviceCtrl.emailSolicitarServicio(req,res);
+    });
+    //Programar servicio Email
+    serviceRouter.post("/emailprogramarservicio",(req,res)=>{//ok!
+        serviceCtrl.emailProgramarServicio(req,res);
+    });
+    //Asignado Tec Email
+    serviceRouter.post("/emailasignarservicio",(req,res)=>{//ok!
+        serviceCtrl.emailAsigTecServicio(req,res);
+    });
 
     return serviceRouter;
 }

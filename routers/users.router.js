@@ -58,5 +58,17 @@ module.exports = (wagner) =>{
         userCtrl.existe(req,res);
     });
 
+    userRouter.get("/activar/:id",(req,res)=>{
+        userCtrl.email_enable(req,res);
+    });
+
+    userRouter.post("/newUserEmail",(req,res)=>{
+        userCtrl.emailNewUser(req,res);
+    });
+    
+    userRouter.get("/getadmin",(req,res)=>{
+        userCtrl.getAdmin(req,res);
+    });
+
     return userRouter;
 } 

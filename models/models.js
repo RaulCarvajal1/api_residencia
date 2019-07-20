@@ -12,12 +12,14 @@ module.exports = (wagner) => {
     const Plant = require('./plants.model');
     const Service = require('./services.model');
     const User = require('./users.model');
+    const Config = require('./config_fecha.model');
 
     const models = {
         User,
         Emg,
         Plant,
-        Service
+        Service,
+        Config
     }
     _.each(models, (v, k)=> {
         wagner.factory(k, ()=>v);
