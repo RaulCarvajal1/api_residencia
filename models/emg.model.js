@@ -25,6 +25,10 @@ const emgSchema = new mongoose.Schema({
         type :  mongoose.Schema.Types.ObjectId,
         require : true
     },
+    cod_pro : {
+        type :  String,
+        require : true
+    },
     status:{
         type : Number,
         default : 0

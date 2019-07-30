@@ -123,10 +123,12 @@ const newServ = (req, res) => {
 const asigtecServicio = (req, res) => {
     const id_s = req.params.id_s;
     const id_t = req.params.id_t;
+    const date = req.body;
     _service.update({ _id: id_s },{$set : 
                                 { 
                                     status : 1,
-                                    tecnico : id_t
+                                    tecnico : id_t,
+                                    date : date.date
                                 }
                             })
         .then(data =>{
@@ -171,11 +173,12 @@ const iniciarServicio = (req, res) => {
 //finalizar servicio
 const finalizarServicio = (req, res) => {
     const id = req.params.id;
-    const sign = req.body.sign;
+    const data = req.body;
     _service.update({ _id: id },{$set : { 
                                         start : Date.now,
                                         status : 3,
-                                        signature : sign
+                                        signature : data.signature,
+                                        score : data.score
                                     }})
         .then(data =>{
             res.status(200);

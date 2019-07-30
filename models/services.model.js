@@ -40,6 +40,9 @@ const servicesSchema = new mongoose.Schema({
     signature : { 
         data: Buffer, 
         contentType: String 
+    },
+    score : { 
+        type : Number
     }
 });
 
