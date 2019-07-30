@@ -2,27 +2,34 @@ const mongoose = require('mongoose');
 
 //Building schema for Configuration
 const contratoSchema = new mongoose.Schema({
+    name : {
+        type :  String
+    },
     client : {
-        type :  mongoose.Schema.Types.ObjectId
+        type :  String//mongoose.Schema.Types.ObjectId
     },
     period : {
         start : {
             type : Date,
-            require : true
-        },
-        open : {
-            type : Boolean
         },
         end : { 
             type : Date
+        },
+        single : {
+            type : Boolean
         }
+    },
+    status : {
+        type : Boolean,
+        default : true
     },
     description : {
         type : String,
         required : true,
         default : "Asistencia técnica a equipos EMG"
     },
-    emgs : []
+    emgs : [],
+    emgsNames : []
 });
 
 //Setting collection name and model

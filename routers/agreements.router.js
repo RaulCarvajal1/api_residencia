@@ -20,7 +20,7 @@ module.exports = (wagner) => {
     });
     //getContratos
     agreementRouter.get("/getcontratos",(req,res)=>{
-        agreementControllers.getContratoByClient(req,res);
+        agreementControllers.getContratos(req,res);
     })
     //addEmg
     agreementRouter.put("/addemg/:id",(req,res)=>{
