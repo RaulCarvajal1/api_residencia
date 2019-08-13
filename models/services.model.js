@@ -11,14 +11,14 @@ const servicesSchema = new mongoose.Schema({
         required : true
     },
     date : {
-        type : Date,
+        type : String,
         required : true
     },
     start : {
-        type :  Date
+        type :  String
     },
     finish : {
-        type :  Date
+        type :  String
     },
     status : {
         type :  Number, 
@@ -35,7 +35,18 @@ const servicesSchema = new mongoose.Schema({
         require : true
     },
     observ : {
-        type : String
+        trabajo_realizado : {
+            type : String,
+            default : ""
+        },
+        comentarios : {
+            type : String,
+            default : ""
+        },
+        recomendaciones : {
+            default : "",
+            type : String
+        }
     },
     signature : { 
         data: Buffer, 

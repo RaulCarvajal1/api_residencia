@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
             type : String,
         }
     },
+    cliente : {
+        type :  mongoose.Schema.Types.ObjectId,
+        required : false
+    },
     active : {
         type : Boolean,
         required : true,

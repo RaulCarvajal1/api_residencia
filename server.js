@@ -12,6 +12,7 @@ const emgsRouter = require('./routers/emgs.router')(wagner);
 const configsRouter = require('./routers/config_fecha.router')(wagner);
 const servicesTypesRouter = require('./routers/services_types.router')(wagner);
 const agreementsRouter = require('./routers/agreements.router')(wagner);
+const clientesRouter = require('./routers/empresa_cliente.router')(wagner);
 
 // Configurando servidor express
 let app = express();
@@ -39,5 +40,6 @@ app.use("/emg",emgsRouter);
 app.use("/config",configsRouter);
 app.use("/config",servicesTypesRouter);
 app.use("/agreements",agreementsRouter);
+app.use("/client",clientesRouter);
 
 module.exports = app;

@@ -16,6 +16,7 @@ module.exports = (wagner) => {
     const Config = require('./config_fecha.model');
     const Tipos = require('./services_types.model');
     const Agreement = require('./agreements.model');
+    const Clients = require('./empresa_cliente.model');
 
     const models = {
         User,
@@ -24,7 +25,8 @@ module.exports = (wagner) => {
         Service,
         Config,
         Tipos,
-        Agreement
+        Agreement,
+        Clients
     }
     _.each(models, (v, k)=> {
         wagner.factory(k, ()=>v);
