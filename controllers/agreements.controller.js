@@ -45,7 +45,7 @@ const getContratoById = (req, res) => {
 //getContratoByClient
 const getContratoByClient = (req, res) => {
     const id = req.params.id;
-    _agreement.findOne({ client : id })
+    _agreement.find({ client : id })
         .then(agreement => {
             res.status(200);
             res.json({

@@ -6,7 +6,7 @@ const contratoSchema = new mongoose.Schema({
         type :  String
     },
     client : {
-        type :  String//mongoose.Schema.Types.ObjectId
+        type :  mongoose.Schema.Types.ObjectId
     },
     period : {
         start : {

@@ -20,6 +20,9 @@ const servicesSchema = new mongoose.Schema({
     finish : {
         type :  String
     },
+    hours : {
+        type : Number
+    },
     status : {
         type :  Number, 
         required : true
@@ -33,6 +36,17 @@ const servicesSchema = new mongoose.Schema({
     emg : {
         type :  mongoose.Schema.Types.ObjectId,
         require : true
+    },
+    service_details : {
+        tipo_sensor : {
+            type : String
+        },
+        tipo_controlador : {
+            type : String
+        },
+        programa : {
+            type : String
+        }
     },
     observ : {
         trabajo_realizado : {
@@ -54,6 +68,28 @@ const servicesSchema = new mongoose.Schema({
     },
     score : { 
         type : Number
+    },
+    requested_by : {
+        type :  mongoose.Schema.Types.ObjectId
+    },
+    agreement : {
+        type : mongoose.Schema.Types.ObjectId,
+        require : true
+    },
+    payment :  {
+        paid : {
+            type : Boolean,
+            default : true
+        },
+        unit_price : {
+            type : Number
+        },
+        amount : {
+            type : Number
+        },
+        total : {
+            type : Number
+        }
     }
 });
 

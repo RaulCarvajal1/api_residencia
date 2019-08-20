@@ -1,6 +1,7 @@
 const status = require('http-status');
 const sgMail = require('@sendgrid/mail');
 const akmail = require('./api_key/sndgrd');
+var moment = require('moment');
 
 let _service;
 
@@ -150,8 +151,8 @@ const asigtecServicio = (req, res) => {
 //iniciar servicio
 const iniciarServicio = (req, res) => {
     const id = req.params.id;
-    _service.update({ _id: id },{$set : { 
-                                        start : Date.now(),
+    _service.updateOne({ _id: id },{$set : { 
+                                        start : getActualDate(),
                                         status : 2
                                     }})
         .then(data =>{
@@ -174,11 +175,21 @@ const iniciarServicio = (req, res) => {
 const finalizarServicio = (req, res) => {
     const id = req.params.id;
     const data = req.body;
-    _service.update({ _id: id },{$set : { 
-                                        start : Date.now,
+    _service.updateOne({ _id: id },{$set : { 
+                                        finish : getActualDate(),
+                                        hours : data.hours,
                                         status : 3,
-                                        signature : data.signature,
-                                        score : data.score
+                                        //signature : data.signature,
+                                        score : data.score,
+                                        'service_details.tipo_sensor' : data.tipo_sensor,
+                                        'service_details.tipo_controlador' : data.tipo_controlador,
+                                        'service_details.tipo_programa' : data.programa,
+                                        'observ.trabajo_realizado' : data.trabajo_realizado,
+                                        'observ.comentarios' : data.comentarios,
+                                        'observ.recomendaciones' : data.recomendaciones,
+                                        'payment.unit_price' : data.unit_price,
+                                        'payment.amount' : data.amount,                                        
+                                        'payment.total' : data.total                                        
                                     }})
         .then(data =>{
             res.status(200);
@@ -599,6 +610,13 @@ function getAsigTecServicioHtmlCliente(data){
                 </table>
             </body>`;
 };
+
+function getActualDate(){
+    var d = new Date();
+    d.setTime(Date.now() - 21600000); //Resta las 6 horas de la zona horario
+    
+    return d.toISOString();
+}
 
 module.exports = (Service) => {
     _service = Service;
