@@ -77,9 +77,8 @@ const servicesSchema = new mongoose.Schema({
         require : true
     },
     payment :  {
-        paid : {
-            type : Boolean,
-            default : true
+        iva : {
+            type : Number
         },
         unit_price : {
             type : Number

@@ -28,8 +28,20 @@ const contratoSchema = new mongoose.Schema({
         required : true,
         default : "Asistencia técnica a equipos EMG"
     },
-    emgs : [],
-    emgsNames : []
+    created : {
+        type : Date,
+        required : true,
+        default : Date.now
+    },
+    monto : {
+        type : Number,
+        required : true,
+        default : 0
+    },
+    monto_actual : {
+        type : Number,
+        required : true
+    }
 });
 
 //Setting collection name and model

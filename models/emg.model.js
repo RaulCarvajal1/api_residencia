@@ -7,11 +7,11 @@ const emgSchema = new mongoose.Schema({
         contentType: String 
     }, 
     info : {
-        name : { type: String},
-        type : { type: String},
-        model : { type: String, require : true},
-        description : { type : String},
-        serial: {type : String}
+        name : { type: String },
+        type : { type: String },
+        model : { type: String, require : true },
+        description : { type : String },
+        serial: {type : String }
     },
     client : {
         type :  mongoose.Schema.Types.ObjectId,

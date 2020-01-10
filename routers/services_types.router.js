@@ -16,6 +16,13 @@ module.exports = (wagner) => {
     stRouter.get("/getst",(req,res)=>{
         stCtrl.getTypes(req,res);
     });
-
+    //Actualizar
+    stRouter.put("/actst/:name",(req,res)=>{
+        stCtrl.actType(req,res);
+    });
+    //Existe
+    stRouter.get("/extst/:name",(req,res)=>{
+        stCtrl.existeType(req,res);
+    });
     return stRouter;
 }

@@ -53,5 +53,9 @@ module.exports = (wagner) => {
         serviceCtrl.emailAsigTecServicio(req,res);
     });
 
+    serviceRouter.get("/bycontrato/:id",(req,res)=>{//ok!
+        serviceCtrl.getByAgreement(req,res);
+    });
+
     return serviceRouter;
 }

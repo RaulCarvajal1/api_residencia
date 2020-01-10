@@ -13,6 +13,8 @@ const configsRouter = require('./routers/config_fecha.router')(wagner);
 const servicesTypesRouter = require('./routers/services_types.router')(wagner);
 const agreementsRouter = require('./routers/agreements.router')(wagner);
 const clientesRouter = require('./routers/empresa_cliente.router')(wagner);
+const ivaRouter = require('./routers/iva.router')(wagner);
+const unitpriceRouter = require('./routers/unit_price.router')(wagner);
 
 // Configurando servidor express
 let app = express();
@@ -41,5 +43,7 @@ app.use("/config",configsRouter);
 app.use("/config",servicesTypesRouter);
 app.use("/agreements",agreementsRouter);
 app.use("/client",clientesRouter);
+app.use("/iva",ivaRouter);
+app.use("/unitprice",unitpriceRouter);
 
 module.exports = app;

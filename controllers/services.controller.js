@@ -42,6 +42,25 @@ const getByClient = (req, res) => {
             });
         });
 };
+//get servicios por contrato
+const getByAgreement = (req, res) => {
+    const id = req.params.id;
+    _service.find({ agreement : id })
+        .then(user => {
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: user
+            });
+        })
+        .catch(error => {
+            res.status(400);
+            res.json({
+                code: 400,
+                detail: error
+            });
+        });
+};
 //get servicios por tecnico
 const getByTec = (req, res) => {
     const idtec = req.params.idtec;
@@ -179,17 +198,19 @@ const finalizarServicio = (req, res) => {
                                         finish : getActualDate(),
                                         hours : data.hours,
                                         status : 3,
-                                        //signature : data.signature,
+                                        signature : data.firma,
                                         score : data.score,
                                         'service_details.tipo_sensor' : data.tipo_sensor,
                                         'service_details.tipo_controlador' : data.tipo_controlador,
-                                        'service_details.tipo_programa' : data.programa,
+                                        'service_details.programa' : data.programa,
                                         'observ.trabajo_realizado' : data.trabajo_realizado,
                                         'observ.comentarios' : data.comentarios,
                                         'observ.recomendaciones' : data.recomendaciones,
+
                                         'payment.unit_price' : data.unit_price,
                                         'payment.amount' : data.amount,                                        
-                                        'payment.total' : data.total                                        
+                                        'payment.total' : data.total,
+                                        'payment.iva' : data.iva                         
                                     }})
         .then(data =>{
             res.status(200);
@@ -621,6 +642,6 @@ function getActualDate(){
 module.exports = (Service) => {
     _service = Service;
     return ({
-        getAll, getByClient, getByTec, getByEmg, getById, newServ, asigtecServicio, iniciarServicio, finalizarServicio, emailSolicitarServicio, emailProgramarServicio, emailAsigTecServicio
+        getAll, getByClient, getByTec, getByEmg, getById, newServ, asigtecServicio, iniciarServicio, finalizarServicio, emailSolicitarServicio, emailProgramarServicio, emailAsigTecServicio, getByAgreement
     });
 }
