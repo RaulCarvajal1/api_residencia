@@ -41,6 +41,26 @@ const contratoSchema = new mongoose.Schema({
     monto_actual : {
         type : Number,
         required : true
+    },
+    conceptos : [
+        {
+            codigo : {
+                type : String,
+                required : true
+            },
+            descripcion : {
+                type : String,
+                required : true
+            },
+            precio : {
+                type : Number,
+                required : true
+            }
+        }
+    ],
+    divisa : {
+        type : String,
+        required : true
     }
 });
 

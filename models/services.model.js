@@ -77,19 +77,32 @@ const servicesSchema = new mongoose.Schema({
         require : true
     },
     payment :  {
-        iva : {
-            type : Number
-        },
-        unit_price : {
-            type : Number
-        },
-        amount : {
-            type : Number
+        divisa : {
+            type : String
         },
         total : {
             type : Number
         }
-    }
+    },
+    conceptos : [
+        {
+            codigo : {
+                type : String
+            },
+            descripcion : {
+                type : String
+            },
+            horas : {
+                type : Number
+            },
+            precio : {
+                type : Number
+            },
+            subtotal : {
+                type : Number
+            }
+        }
+    ]
 });
 
 //Setting collection name and model

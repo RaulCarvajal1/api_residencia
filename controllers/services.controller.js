@@ -170,8 +170,9 @@ const asigtecServicio = (req, res) => {
 //iniciar servicio
 const iniciarServicio = (req, res) => {
     const id = req.params.id;
+    const date = req.body.date;
     _service.updateOne({ _id: id },{$set : { 
-                                        start : getActualDate(),
+                                        start : date,
                                         status : 2
                                     }})
         .then(data =>{
@@ -195,22 +196,20 @@ const finalizarServicio = (req, res) => {
     const id = req.params.id;
     const data = req.body;
     _service.updateOne({ _id: id },{$set : { 
-                                        finish : getActualDate(),
                                         hours : data.hours,
                                         status : 3,
                                         signature : data.firma,
                                         score : data.score,
+                                        finish : data.date,
                                         'service_details.tipo_sensor' : data.tipo_sensor,
                                         'service_details.tipo_controlador' : data.tipo_controlador,
                                         'service_details.programa' : data.programa,
                                         'observ.trabajo_realizado' : data.trabajo_realizado,
                                         'observ.comentarios' : data.comentarios,
                                         'observ.recomendaciones' : data.recomendaciones,
-
-                                        'payment.unit_price' : data.unit_price,
-                                        'payment.amount' : data.amount,                                        
+                                        'payment.divisa' : data.divisa,                                        
                                         'payment.total' : data.total,
-                                        'payment.iva' : data.iva                         
+                                        conceptos : data.conceptos                  
                                     }})
         .then(data =>{
             res.status(200);
