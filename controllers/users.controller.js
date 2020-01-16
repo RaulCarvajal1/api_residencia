@@ -29,10 +29,10 @@ const emailNewUser=(req,res)=>{
     const data = req.body;
     sgMail.setApiKey(akmail.SENGRID_APIKEY);
     const msg = {
-      to: data.email,
+      to: [data.email],
       from: akmail.sender_email,
       subject: 'Mantenimiento EMG',
-      text: 'Mantenimiento EMG',
+      text: 'Registro Mantenimiento EMG',
       html: getHtml(data)
     };
     sgMail.send(msg).then(
@@ -78,12 +78,12 @@ function getHtml(data){
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <p>Para activar tu cuenta da click aquí ${akmail.api_url+'user/activar/'+data.id}</p>
+                                                    <p>Para activar tu cuenta da click <a href="${akmail.api_url+'user/activar/'+data.id}">aquí</a>.</p>
                                                     <ul>
                                                         <li><b>Nombre de usuario:</b> ${data.username}</li>
                                                         <li><b>Contraseña:</b> ${data.password}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aqui LINK_APP</p>
+                                                    <p>Inicia sesión aqui ${akmail.app_url}</p>
                                                     <p>Se te recomienda cambiar de usuario y contraseña en tu primer inicio de sesión, por motivos de seguridad.</p>
                                                 </td>
                                             </tr>
@@ -106,21 +106,11 @@ const login = (req, res) => {
     const body = req.body;
     _user.findOne({ username : body.username })
         .then(user => {
-            if(user.password == body.password && user.active==true){
-                res.status(200);
-                res.json({
-                    code: 200,
-                    authorized: true,
-                    detail : user
-                });
-            }else{
-                res.status(200);
-                res.json({
-                    code: 200,
-                    authorized: false,
-                    msg : "Usuario inexistente o inactivo"
-                });
-            }
+            res.status(200);
+            res.json({
+                code: 200,
+                detail : user
+            });
         })
         .catch(error => {
             res.status(400);

@@ -204,9 +204,44 @@ const restarContrato = (req, res) => {
         });    
 };
 
+const actualizarContrato = (req, res) => {
+    const body = req.body;
+    _agreement.updateOne(
+            { _id : body._id },
+            { $set : 
+                {
+                    client : body.client,
+                    description : body.description,
+                    name : body.name,
+                    period : body.period,
+                    monto : body.monto,
+                    monto_actual : body.monto_actual,
+                    conceptos : body.conceptos,
+                    divisa : body.divisa
+                }
+            }
+        )
+        .then(data => {
+            console.log(data);
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: data
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(400);
+            res.json({
+                code: 400,
+                detail: error
+            });
+        });
+}
+
 module.exports = (Agreement) => {
     _agreement = Agreement;
     return ({
-        saveContrato, getContratoById, getContratoByClient, getContratoByEmg, getContratos, addEmg, getContratosActivos, getContratosActivosByClient,vencerContrato,restarContrato
+        saveContrato, getContratoById, getContratoByClient, getContratoByEmg, getContratos, addEmg, getContratosActivos, getContratosActivosByClient,vencerContrato,restarContrato, actualizarContrato
     })
 }

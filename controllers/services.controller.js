@@ -201,6 +201,7 @@ const finalizarServicio = (req, res) => {
                                         signature : data.firma,
                                         score : data.score,
                                         finish : data.date,
+                                        start : data.date_ini,
                                         'service_details.tipo_sensor' : data.tipo_sensor,
                                         'service_details.tipo_controlador' : data.tipo_controlador,
                                         'service_details.programa' : data.programa,
@@ -243,7 +244,7 @@ const emailSolicitarServicio=(req,res)=>{
     const data = req.body;
     sgMail.setApiKey(akmail.SENGRID_APIKEY);
     const msg = {
-      to: data.email,
+      to: [data.email],
       from: akmail.sender_email,
       subject: 'Servicio EMG solicitado',
       text: 'Mantenimiento EMG',
@@ -299,7 +300,7 @@ function getSolicitarServicioHtml(data){
                                                         <li><b>Fecha y hora solicitada:</b> ${data.date}</li>
                                                         <li><b>Id de servicio:</b> ${data.id}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aqui LINK_APP</p>
+                                                    <p>Inicia sesión aqui ${akmail.app_url}</p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -331,14 +332,14 @@ const emailProgramarServicio=(req,res)=>{
     const data = req.body;
     sgMail.setApiKey(akmail.SENGRID_APIKEY);
     const msgTecnico = {
-      to: data.email_tecnico,
+      to: [data.email_tecnico],
       from: akmail.sender_email,
       subject: 'Servicio EMG programado',
       text: 'Mantenimiento EMG',
       html: getProgramarServicioHtmlTecnico(data)
     };
     const msgCliente = {
-        to: data.email_cliente,
+        to: [data.email_cliente],
         from: akmail.sender_email,
         subject: 'Servicio EMG programado',
         text: 'Mantenimiento EMG',
@@ -406,7 +407,7 @@ function getProgramarServicioHtmlTecnico(data){
                                                         <li><b>Fecha y hora:</b> ${data.date}</li>
                                                         <li><b>Id de servicio:</b> ${data.id}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aquí LINK_APP</p>
+                                                    <p>Inicia sesión aquí ${akmail.app_url}</p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -456,7 +457,7 @@ function getProgramarServicioHtmlCliente(data){
                                                         <li><b>Fecha y hora:</b> ${data.date}</li>
                                                         <li><b>Id de servicio:</b> ${data.id}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aquí LINK_APP</p>
+                                                    <p>Inicia sesión aquí ${akmail.app_url}</p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -488,14 +489,14 @@ const emailAsigTecServicio=(req,res)=>{
     const data = req.body;
     sgMail.setApiKey(akmail.SENGRID_APIKEY);
     const msgTecnico = {
-      to: data.email_tecnico,
+      to: [data.email_tecnico],
       from: akmail.sender_email,
       subject: 'Servicio EMG programado',
       text: 'Mantenimiento EMG',
       html: getAsigTecServicioHtmlTecnico(data)
     };
     const msgCliente = {
-        to: data.email_cliente,
+        to: [data.email_cliente],
         from: akmail.sender_email,
         subject: 'Servicio EMG programado',
         text: 'Mantenimiento EMG',
@@ -563,7 +564,7 @@ function getAsigTecServicioHtmlTecnico(data){
                                                         <li><b>Fecha y hora:</b> ${data.date}</li>
                                                         <li><b>Id de servicio:</b> ${data.id}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aquí LINK_APP</p>
+                                                    <p>Inicia sesión aquí ${akmail.app_url}</p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -613,7 +614,7 @@ function getAsigTecServicioHtmlCliente(data){
                                                         <li><b>Fecha y hora:</b> ${data.date}</li>
                                                         <li><b>Id de servicio:</b> ${data.id}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aquí LINK_APP</p>
+                                                    <p>Inicia sesión aquí ${akmail.app_url}</p>
                                                 </td>
                                             </tr>
                                         </table>

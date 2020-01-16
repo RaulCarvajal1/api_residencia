@@ -39,6 +39,10 @@ module.exports = (wagner) => {
     agreementRouter.put("/restar/:id",(req,res)=>{
         agreementControllers.restarContrato(req,res);
     })
+
+    agreementRouter.put("/actualizar",(req,res)=>{
+        agreementControllers.actualizarContrato(req,res);
+    })
     
     return agreementRouter;
 }
