@@ -43,6 +43,9 @@ module.exports = (wagner) => {
     emgsRouter.patch("/enable/:id",(req,res)=>{//ok!!
         emgsCtrl.enable(req,res);
     });
+    emgsRouter.put("/edit",(req, res) => {
+        emgsCtrl.edit(req,res);
+    });
 
     return emgsRouter;
 }

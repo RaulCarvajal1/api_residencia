@@ -202,10 +202,42 @@ const enable = (req, res) => {
             });
         });    
 };
+//Edit
+const edit = (req, res) => {
+    const body = req.body;
+    _emg.update(
+        { _id: body._id },
+        {$set : 
+            { 
+                info : body.info,
+                meta : body.meta,
+                client : body.client,
+                plant : body.plant,
+                cod_pro : body.cod_pro,
+                status : 0,
+                active : true
+            }
+        })
+        .then(data =>{
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: data
+            });
+        })
+        .catch(error =>{
+            console.log(error);
+            res.status(400);
+            res.json({
+                code: 400,
+                detail: error
+            });
+        }); 
+}
 
 module.exports = (Emg) => {
     _emg = Emg;
     return ({
-        getAll, getById, getByClient, getByPlant, getByLine, newEmg, disable, enable, genQrEmg, getByPlantAndLine
+        getAll, getById, getByClient, getByPlant, getByLine, newEmg, disable, enable, genQrEmg, getByPlantAndLine, edit
     })
 }

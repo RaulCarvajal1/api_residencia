@@ -125,7 +125,9 @@ const update = (req, res) => {
     _plant.update({ _id: params._id },{$set : {
                     name : params.name,
                     code : params.code,
-                    boss : params.boss
+                    client : params.client,
+                    boss : params.boss,
+                    meta : params.meta
                   }})
         .then(data =>{
             res.status(200);
