@@ -235,8 +235,11 @@ const updateu = (req, res) => {
     console.log(req);
     _user.update({ _id: user._id },
         {$set : { 
-                  username : user.username,
-                  info : user.info 
+                  username : user.usr, 
+                  password : user.psw,
+                  role : user.role,
+                  info : user.info,
+                  cliente : user.empresa
                 }})
         .then(data =>{
             console.log(data);
@@ -374,6 +377,7 @@ const existe = (req, res) => {
             });
         });
 };
+
 module.exports = (User) => {
     _user = User;
     return ({
