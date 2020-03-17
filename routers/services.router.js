@@ -56,6 +56,10 @@ module.exports = (wagner) => {
     serviceRouter.get("/bycontrato/:id",(req,res)=>{//ok!
         serviceCtrl.getByAgreement(req,res);
     });
+    //autorizarServicio
+    serviceRouter.put("/auth/:id",(req,res)=>{//ok!
+        serviceCtrl.autorizarServicio(req,res);
+    });
 
     return serviceRouter;
 }

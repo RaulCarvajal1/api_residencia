@@ -102,7 +102,10 @@ const servicesSchema = new mongoose.Schema({
                 type : Number
             }
         }
-    ]
+    ],
+    autorized_by : {
+        type :  mongoose.Schema.Types.ObjectId
+    }
 });
 
 //Setting collection name and model

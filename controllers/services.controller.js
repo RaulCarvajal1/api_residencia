@@ -198,8 +198,8 @@ const finalizarServicio = (req, res) => {
     _service.updateOne({ _id: id },{$set : { 
                                         hours : data.hours,
                                         status : 3,
-                                        signature : data.firma,
-                                        score : data.score,
+                                        //signature : data.firma,
+                                        //score : data.score,
                                         finish : data.date,
                                         start : data.date_ini,
                                         'service_details.tipo_sensor' : data.tipo_sensor,
@@ -228,6 +228,32 @@ const finalizarServicio = (req, res) => {
             });
         });    
 };
+
+const autorizarServicio = (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    _service.updateOne({ _id: id },{$set : { 
+                                        status : 4,
+                                        signature : data.firma,
+                                        score : data.score,
+                                        autorized_by : data.autorized_by          
+                                    }})
+        .then(data =>{
+            res.status(200);
+            res.json({
+                code: 200,
+                detail: data
+            });
+        })
+        .catch(error =>{
+            console.log(error);
+            res.status(400);
+            res.json({
+                code: 400,
+                detail: error
+            });
+        });
+}
 
 //Envio de correos 
 //Solicitar servicio
@@ -642,6 +668,6 @@ function getActualDate(){
 module.exports = (Service) => {
     _service = Service;
     return ({
-        getAll, getByClient, getByTec, getByEmg, getById, newServ, asigtecServicio, iniciarServicio, finalizarServicio, emailSolicitarServicio, emailProgramarServicio, emailAsigTecServicio, getByAgreement
+        getAll, getByClient, getByTec, getByEmg, getById, newServ, asigtecServicio, iniciarServicio, finalizarServicio, emailSolicitarServicio, emailProgramarServicio, emailAsigTecServicio, getByAgreement, autorizarServicio
     });
 }

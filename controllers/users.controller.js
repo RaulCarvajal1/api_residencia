@@ -83,8 +83,8 @@ function getHtml(data){
                                                         <li><b>Nombre de usuario:</b> ${data.username}</li>
                                                         <li><b>Contraseña:</b> ${data.password}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aqui ${akmail.app_url}</p>
-                                                    <p>Se te recomienda cambiar de usuario y contraseña en tu primer inicio de sesión, por motivos de seguridad.</p>
+                                                    <p>Inicia sesión <a href="${akmail.app_url}">aquí</a></p>
+                                                    <p>Por motivos se seguridad de tu cuenta te recomendamos cambiar de usuario y contraseña en tu primer inicio de sesión.</p>
                                                 </td>
                                             </tr>
                                         </table>

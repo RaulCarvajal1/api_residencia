@@ -19,6 +19,7 @@ module.exports = (wagner) => {
     const Clients = require('./empresa_cliente.model');
     const Iva = require('./iva.model');
     const Unitprice = require('./unit_price.model');
+    const Models = require('./models.model');
 
     const models = {
         User,
@@ -30,7 +31,8 @@ module.exports = (wagner) => {
         Agreement,
         Clients,
         Iva,
-        Unitprice
+        Unitprice,
+        Models
     }
     _.each(models, (v, k)=> {
         wagner.factory(k, ()=>v);
