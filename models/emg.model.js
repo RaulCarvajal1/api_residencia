@@ -47,6 +47,14 @@ const emgSchema = new mongoose.Schema({
             type : Date,
             default : Date.now
         }
+    },
+    enlaces : {
+        type : String,
+        required : false
+    },
+    extras : {
+        type : String,
+        required : false
     }
 });
 

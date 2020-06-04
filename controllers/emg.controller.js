@@ -215,7 +215,9 @@ const edit = (req, res) => {
                 plant : body.plant,
                 cod_pro : body.cod_pro,
                 status : 0,
-                active : true
+                active : true,
+                enlaces : body.enlaces,
+                extras : body.extras
             }
         })
         .then(data =>{

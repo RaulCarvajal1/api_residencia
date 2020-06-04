@@ -13,6 +13,10 @@ const modelsSchema = new mongoose.Schema({
     descripcion : {
         type : String,
         required : true
+    },
+    enlaces : {
+        type : String,
+        required : false
     }
 });
  

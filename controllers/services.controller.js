@@ -210,7 +210,8 @@ const finalizarServicio = (req, res) => {
                                         'observ.recomendaciones' : data.recomendaciones,
                                         'payment.divisa' : data.divisa,                                        
                                         'payment.total' : data.total,
-                                        conceptos : data.conceptos                  
+                                        conceptos : data.conceptos,
+                                        enlaces : data.enlaces                
                                     }})
         .then(data =>{
             res.status(200);
@@ -326,7 +327,7 @@ function getSolicitarServicioHtml(data){
                                                         <li><b>Fecha y hora solicitada:</b> ${data.date}</li>
                                                         <li><b>Id de servicio:</b> ${data.id}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aqui ${akmail.app_url}</p>
+                                                    <p>Inicia sesión <a href="${akmail.app_url}">aquí</a></p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -373,7 +374,7 @@ const emailProgramarServicio=(req,res)=>{
     };
     sgMail.send(msgTecnico).then(
         data => {
-            sgMail.send(msgCliente).then(
+            /*sgMail.send(msgCliente).then(
                 data => {
                     res.json({
                         code : 200,
@@ -388,7 +389,11 @@ const emailProgramarServicio=(req,res)=>{
                     });
                     console.log(err);
                 }
-            );
+            );*/
+            res.json({
+                code : 200,
+                detail : data
+            })
         }
     ).catch(
         err => {
@@ -429,11 +434,10 @@ function getProgramarServicioHtmlTecnico(data){
                                                     <p>Por favor accede a tu cuenta para que revises el nuevo servicio que se te ha sido asignado</p>
                                                     <p>Datos del servicio</p>
                                                     <ul>
-                                                        <li><b>Cliente que solicita:</b> ${data.nameCli}</li>
                                                         <li><b>Fecha y hora:</b> ${data.date}</li>
                                                         <li><b>Id de servicio:</b> ${data.id}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aquí ${akmail.app_url}</p>
+                                                    <p>Inicia sesión <a href="${akmail.app_url}">aquí</a></p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -483,7 +487,7 @@ function getProgramarServicioHtmlCliente(data){
                                                         <li><b>Fecha y hora:</b> ${data.date}</li>
                                                         <li><b>Id de servicio:</b> ${data.id}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aquí ${akmail.app_url}</p>
+                                                    <p>Inicia sesión <a href="${akmail.app_url}">aquí</a></p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -590,7 +594,7 @@ function getAsigTecServicioHtmlTecnico(data){
                                                         <li><b>Fecha y hora:</b> ${data.date}</li>
                                                         <li><b>Id de servicio:</b> ${data.id}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aquí ${akmail.app_url}</p>
+                                                    <p>Inicia sesión <a href="${akmail.app_url}">aquí</a></p>
                                                 </td>
                                             </tr>
                                         </table>
@@ -640,7 +644,7 @@ function getAsigTecServicioHtmlCliente(data){
                                                         <li><b>Fecha y hora:</b> ${data.date}</li>
                                                         <li><b>Id de servicio:</b> ${data.id}</li>
                                                     </ul>
-                                                    <p>Inicia sesión aquí ${akmail.app_url}</p>
+                                                    <p>Inicia sesión <a href="${akmail.app_url}">aquí</a></p>
                                                 </td>
                                             </tr>
                                         </table>
